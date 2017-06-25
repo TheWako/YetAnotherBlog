@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Yet Another Blog</h1>
+<div class="container">
+	{% for post in post %}
+		<div class="postBlock">
+			<div class="dateAuthor">Publié le {{ post.creationDate|date("d/m/Y") }} par {{ post.author }}</div>
+			<div class="titleBlock"><span class="title"><a href="{{ path("blog_show", {'slug': post.slug})}}">{{ post.title }}</a></span><span class="category"><a href="{{ path("blog_show_by_category", {'slug': post.category.slug})}}">{{ post.category }}</a></span></div>
+			<div class="contentBlock">{{ post.content }}</div>
+			<a href="{{ path('post_edit', {'id': post.id}) }}">
+				<button>
+        			Editer
+        		</button>
+    		</a>
+		</div>
+	{% endfor %}
+	<h2>Ajouter un commentaire</h2>
+	{{ form_start(form) }}
+    		{{ form_errors(form) }}
+    		{{ form_row(form.content) }}
+    		<input type="submit" value="Valider">
+	{{ form_end(form) }}
+	<h2>Commentaires:</h2>
+	{% for comment in commentsByPost %}
+	    <div class="postBlock">
+			<div class="dateAuthor">Publié le {{ comment.creationDate|date("d/m/Y à H:m") }}</div>
+			{{ comment.user }}
+			<div class="contentBlock">{{ comment.content }}</div>
+			<a href="{{ path('comment_edit', {'id': comment.id}) }}">
+				<button>
+        			Editer
+        		</button>
+    		</a>
+    		<a href="{{ path('comment_delete', {'id': comment.id}) }}">
+				<button>
+        			Suprimmer
+        		</button>
+    		</a>
+		</div>
+	{% endfor %}
+</div>
+{% endblock %}

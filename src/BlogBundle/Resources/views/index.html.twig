@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Yet Another Blog</h1>
+<div class="container">
+	{% for post in posts %}
+		<div class="postBlock">
+			<div class="dateAuthor">Publié le {{ post.creationDate|date("d/m/Y") }} par {{ post.author }}</div>
+			<div class="titleBlock"><span class="title"><a href="{{ path("blog_show", {'slug': post.slug})}}">{{ post.title }}</a></span><span class="category"><a href="{{ path("blog_show_by_category", {'slug': post.category.slug})}}">{{ post.category }}</a></span></div>
+			<div class="contentBlock">{{ post.content }}</div>
+			<div class="continue"><a href="{{ path("blog_show", {'slug': post.slug})}}">Lire la suite >></a></div>
+		</div>
+	{% endfor %}
+</div>
+{% endblock %}

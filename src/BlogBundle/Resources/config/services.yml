@@ -1,0 +1,21 @@
+services:
+  admin.category:
+      class: BlogBundle\Admin\CategoryAdmin
+      arguments: [~, BlogBundle\Entity\Category, ~]
+      tags:
+          - { name: sonata.admin, manager_type: orm, label: Categorie }
+  admin.post:
+      class: BlogBundle\Admin\PostAdmin
+      arguments: [~, BlogBundle\Entity\Post, ~]
+      tags:
+          - { name: sonata.admin, manager_type: orm, label: Article }
+  post.listener:
+      class: BlogBundle\Listener\PostListener
+      arguments: ['@security.token_storage']
+      tags:
+          - { name: doctrine.event_listener, event: prePersist }
+  comment.listener:
+      class: BlogBundle\Listener\CommentListener
+      arguments: ['@security.token_storage']
+      tags:
+          - { name: doctrine.event_listener, event: prePersist }
