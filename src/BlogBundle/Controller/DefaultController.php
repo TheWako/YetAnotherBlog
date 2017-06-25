@@ -9,7 +9,11 @@ use Symfony\Component\HttpFoundation\Request;
 use BlogBundle\Entity\Comment;
 use BlogBundle\Entity\Post;
 
-
+/**
+ * blog controller.
+ *
+ * @Route("blog")
+ */
 class DefaultController extends Controller
 {
     /**
@@ -106,7 +110,7 @@ class DefaultController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($commentsByPost);
-            //$em->remove($post);
+            $em->remove($post);
             $em->flush();
         }
 

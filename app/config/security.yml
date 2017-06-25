@@ -29,3 +29,9 @@ security:
         - { path: ^/resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/admin/, role: ROLE_ADMIN }
         - { path: ^/yab/, role: ROLE_ADMIN }
+        - { path: ^/post/, role: ROLE_ADMIN }
+        - { path: ^/comment/, role: ROLE_ADMIN }
+        - { path: ^/categories/, role: ROLE_ADMIN }
+        - { path: ^/post/, role: ROLE_EDITOR }
+        - { path: ^/comment/, role: ROLE_EDITOR }
+        - { path: ^/categories/, role: ROLE_EDITOR }
